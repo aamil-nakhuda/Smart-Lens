@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/image_search"
+        android:icon="@drawable/ic_imagesearch"
+        android:title="@string/image_search" />
+
+    <item
+        android:id="@+id/word_search"
+        android:icon="@drawable/ic_wordsearch"
+        android:title="@string/word_search" />
+
+    <item
+        android:id="@+id/live_word_search"
+        android:icon="@drawable/ic_wordsearch"
+        android:title="@string/live_word_search" />
+
+    <item
+        android:id="@+id/code_search"
+        android:icon="@drawable/ic_codesearch"
+        android:title="@string/code_search" />
+
+</menu>
