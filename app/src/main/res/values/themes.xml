@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.SmartLens" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/light_theme_blue</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -10,9 +10,13 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/action_bar</item>
+        <item name="android:navigationBarColor">?attr/action_bar</item>
         <!-- Customize your theme here. -->
 
-
+        <!--for the custom action bar and bottom navigation bar-->
+        <item name="action_bar">@color/light_theme_dark_blue</item>
+        <item name="activity_bg">@color/white</item>
+        <item name="outline_btn_txt_icon">@color/light_theme_dark_blue</item>
     </style>
 </resources>

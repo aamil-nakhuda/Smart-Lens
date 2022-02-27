@@ -4,43 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EF5350"
+    android:background="?attr/activity_bg"
     tools:context=".fragments.WordSearchFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <include
+            android:id="@+id/action_bar"
+            layout="@layout/action_bar" />
+
         <ImageView
             android:id="@+id/placeholder_image"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="40dp"
-            android:src="@drawable/common_google_signin_btn_icon_dark" />
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_below="@+id/action_bar"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
+            tools:src="@drawable/word_search1" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/photo_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MyNormalBtn"
             android:layout_below="@+id/placeholder_image"
-            android:layout_gravity="center"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:text="Take a photo" />
+            android:text="Take a photo"
+            android:textSize="16sp"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_round_add_a_photo_24"
+            app:iconSize="25dp"
+            app:iconTint="@color/white" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/fetch_resultsbtn"
-            android:layout_width="match_parent"
+            style="@style/MyOutlineBtn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/photo_btn"
-            android:layout_gravity="center"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="50dp"
-            android:text="Fetch Results" />
+            android:text="Fetch Results"
+            android:textColor="?attr/outline_btn_txt_icon"
+            android:textSize="16sp"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_round_image_24"
+            app:iconSize="25dp"
+            app:iconTint="?attr/outline_btn_txt_icon"
+            app:strokeColor="?attr/action_bar"
+            tools:visibility="visible" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/translate_chip_grp"
@@ -48,10 +60,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/fetch_resultsbtn"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginTop="16dp"
             android:visibility="gone"
             app:chipSpacingHorizontal="10dp"
             app:singleLine="true"
@@ -64,43 +75,65 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Copy"
-                app:chipIcon="@drawable/ic_codesearch" />
+                android:textColor="?attr/outline_btn_txt_icon"
+                app:chipBackgroundColor="?attr/activity_bg"
+                app:chipIcon="@drawable/ic_round_content_copy_24"
+                app:chipIconTint="?attr/outline_btn_txt_icon"
+                app:chipStartPadding="10dp"
+                app:chipStrokeColor="?attr/action_bar"
+                app:chipStrokeWidth="1dp" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/share_chip"
+                android:textColor="?attr/outline_btn_txt_icon"
                 style="@style/Widget.MaterialComponents.Chip.Action"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Share"
-                app:chipIcon="@drawable/ic_codesearch" />
+                app:chipBackgroundColor="?attr/activity_bg"
+                app:chipIcon="@drawable/ic_round_share_24"
+                app:chipIconTint="?attr/outline_btn_txt_icon"
+                app:chipStartPadding="10dp"
+                app:chipStrokeColor="?attr/action_bar"
+                app:chipStrokeWidth="1dp" />
 
             <com.google.android.material.chip.Chip
+                android:textColor="?attr/outline_btn_txt_icon"
                 android:id="@+id/listen_chip"
                 style="@style/Widget.MaterialComponents.Chip.Action"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Listen"
-                app:chipIcon="@drawable/ic_codesearch" />
+                app:chipBackgroundColor="?attr/activity_bg"
+                app:chipIcon="@drawable/ic_listen"
+                app:chipIconTint="?attr/outline_btn_txt_icon"
+                app:chipStartPadding="10dp"
+                app:chipStrokeColor="?attr/action_bar"
+                app:chipStrokeWidth="1dp" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/translate_chip"
-                style="@style/Widget.MaterialComponents.Chip.Action"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Translate"
-                app:chipIcon="@drawable/ic_codesearch" />
+            <!--            <com.google.android.material.chip.Chip-->
+            <!--                android:id="@+id/translate_chip"-->
+            <!--                style="@style/Widget.MaterialComponents.Chip.Action"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="Translate"-->
+            <!--                app:chipIcon="@drawable/ic_codesearch" />-->
         </com.google.android.material.chip.ChipGroup>
 
         <TextView
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:id="@+id/results_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/fetch_resultsbtn"
+            android:layout_below="@+id/translate_chip_grp"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="50dp"
-            android:textSize="16sp" />
+            android:layout_marginTop="8dp"
+            android:textColor="?attr/outline_btn_txt_icon"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="He read about a hike called the incline in the guidebook. It said it was a strenuous hike and to bring plenty of water. “A beautiful hike to the clouds” described one review. “Not for the faint-hearted,” said another. “Not too bad of a workout”, bragged a third review. I thought I’d hike it when I fly in from Maryland on my day off from the senior citizen's wellness conference. I hiked 2 miles a day around the neighborhood so I could handle a 1.1-mile hike. What a fo" />
 
     </RelativeLayout>
 </ScrollView>

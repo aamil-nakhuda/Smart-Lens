@@ -3,8 +3,11 @@ package com.smartlens;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
 import android.widget.GridView;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,8 +36,10 @@ import java.util.List;
 public class ImageSearchResultActivity extends AppCompatActivity {
     ArrayList<SearchRVModel> searchRVModelArrayList;
     SearchRVAdapter searchRVAdapter;
-    private ProgressBar progressBar;
+    ImageView backBtn, loadingIV;
+    TextView activityName, loadingTV;
     private String imageURL, title, link;
+    final Handler handler = new Handler();
 
 
     @Override
@@ -42,9 +47,18 @@ public class ImageSearchResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_search_result);
 
+        backBtn = findViewById(R.id.back_button);
+        backBtn.setVisibility(View.VISIBLE);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         Intent intent = getIntent();
         Bitmap bitmap = intent.getParcelableExtra("BitmapImage");
-        progressBar = findViewById(R.id.progress_bar1);
+//        FirebaseApp.initializeApp(this);
 
 
         //Initializing ArrayList+ArrayAdapter+ListView
@@ -55,15 +69,18 @@ public class ImageSearchResultActivity extends AppCompatActivity {
         GridView objResultsListView = findViewById(R.id.results_gridView);
         objResultsListView.setAdapter(searchRVAdapter);
 
-        // inside the label image method we are calling a firebase vision image
-        // and passing our image bitmap to it.
+        activityName = findViewById(R.id.activity_name);
+        loadingIV = findViewById(R.id.progress_bar_img);
+        loadingTV = findViewById(R.id.textview_loading);
+
+        activityName.setText("Results");
+        loadingIV.setVisibility(View.VISIBLE);
+        loadingTV.setVisibility(View.VISIBLE);
+
         FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
 
-        // on below line we are creating a labeler for our image bitmap and
-        // creating a variable for our firebase vision image labeler.
         FirebaseVisionImageLabeler labeler = FirebaseVision.getInstance().getOnDeviceImageLabeler();
 
-        // calling a method to process an image and adding on success listener method to it.
         labeler.processImage(image).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionImageLabel>>() {
             @Override
             public void onSuccess(@NonNull List<FirebaseVisionImageLabel> firebaseVisionImageLabels) {
@@ -91,6 +108,8 @@ public class ImageSearchResultActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
 
                 try {
+                    loadingIV.setVisibility(View.GONE);
+                    loadingTV.setVisibility(View.GONE);
                     // on below line we are extracting data from our json.
                     JSONArray organicResultsArray = response.getJSONArray("images_results");
                     for (int i = 0; i < organicResultsArray.length(); i++) {
@@ -119,7 +138,27 @@ public class ImageSearchResultActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // displaying error message.
-                Toast.makeText(ImageSearchResultActivity.this, "No Result found for the search query..", Toast.LENGTH_SHORT).show();
+                int[] placeHolderImages = {R.drawable.error,
+                        R.drawable.no_internet, R.drawable.no_internet1
+                        , R.drawable.no_internet2,
+                        R.drawable.no_in1,
+                        R.drawable.not_found, R.drawable.not_found1};
+                Runnable runnable = new Runnable() {
+                    int i = 0;
+
+                    @Override
+                    public void run() {
+                        loadingIV.setImageResource(placeHolderImages[i]);
+                        i++;
+                        if (i >= placeHolderImages.length) {
+                            i = 0;
+                        }
+                        handler.postDelayed(this, 3000);
+                    }
+                };
+                handler.postDelayed(runnable, 0);
+                loadingTV.setText("No Results found or No Internet connection!");
+//                Toast.makeText(ImageSearchResultActivity.this, "No Result found for the search query..", Toast.LENGTH_SHORT).show();
             }
         });
         // adding json object request to our queue.

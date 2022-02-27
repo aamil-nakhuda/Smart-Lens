@@ -3,13 +3,18 @@ package com.smartlens.fragments;
 import static android.Manifest.permission.CAMERA;
 import static android.app.Activity.RESULT_OK;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +29,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.mlkit.vision.common.InputImage;
@@ -33,20 +39,22 @@ import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.TextRecognizerOptions;
 import com.smartlens.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * create an instance of this fragment.
- */
+import java.util.Locale;
+
+
 public class WordSearchFragment extends Fragment {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private ImageView placeholderImage;
-    private TextView resultsTextView;
-    private Button photoBtn, fetchResultBtn;
-    private Chip translateChip;
+    private TextView resultsTextView, actionBarTv;
+    private MaterialButton fetchResultBtn;
+    //    private Chip translateChip;
+    private Chip copyChip, shareChip, listenChip;
     private ChipGroup translateChipGroup;
     private Bitmap bitmap;
+    TextToSpeech tts;
+    final Handler handler = new Handler();
 
     public WordSearchFragment() {
         // Required empty public constructor
@@ -60,10 +68,32 @@ public class WordSearchFragment extends Fragment {
 
         resultsTextView = root.findViewById(R.id.results_btn);
         placeholderImage = root.findViewById(R.id.placeholder_image);
-        photoBtn = root.findViewById(R.id.photo_btn);
+        Button photoBtn = root.findViewById(R.id.photo_btn);
         fetchResultBtn = root.findViewById(R.id.fetch_resultsbtn);
-        translateChip = root.findViewById(R.id.translate_chip);
+//        translateChip = root.findViewById(R.id.translate_chip);
+        copyChip = root.findViewById(R.id.copy_chip);
+        shareChip = root.findViewById(R.id.share_chip);
+        listenChip = root.findViewById(R.id.listen_chip);
         translateChipGroup = root.findViewById(R.id.translate_chip_grp);
+
+        actionBarTv = root.findViewById(R.id.activity_name);
+        actionBarTv.setText("Word Search");
+
+        int[] placeHolderImages = {R.drawable.word_search, R.drawable.word_search1};
+        Runnable runnable = new Runnable() {
+            int i = 0;
+
+            @Override
+            public void run() {
+                placeholderImage.setImageResource(placeHolderImages[i]);
+                i++;
+                if (i >= placeHolderImages.length) {
+                    i = 0;
+                }
+                handler.postDelayed(this, 3000);
+            }
+        };
+        handler.postDelayed(runnable, 0);
 
         photoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,11 +113,55 @@ public class WordSearchFragment extends Fragment {
             }
         });
 
-        translateChip.setOnClickListener(new View.OnClickListener() {
+//        translateChip.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//             Intent translateIntent = new Intent(getContext(), WordSearchActivityResult.class);
+//             startActivity(translateIntent);
+//            }
+//        });
+
+        copyChip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent translateIntent = new Intent(getContext(), WordSearchActivityResult.class);
-//                startActivity(translateIntent);
+                String dataCopyOrShareListen = resultsTextView.getText().toString();
+                ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("TextCopied", dataCopyOrShareListen);
+                clipboard.setPrimaryClip(clipData);
+
+                Toast.makeText(getContext(), "Copied to Clipboard", Toast.LENGTH_SHORT).show();
+            }
+        });
+        shareChip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String dataCopyOrShareListen = resultsTextView.getText().toString();
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, dataCopyOrShareListen);
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+            }
+        });
+        listenChip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tts = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
+                    @Override
+                    public void onInit(int i) {
+                        if (i == TextToSpeech.SUCCESS) {
+                            Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                            tts.setLanguage(Locale.US);
+                        } else {
+                            Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+                tts.speak("Hello I am Text to speech", TextToSpeech.QUEUE_FLUSH, null);
             }
         });
         return root;
@@ -126,7 +200,9 @@ public class WordSearchFragment extends Fragment {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             bitmap = (Bitmap) extras.get("data");
+            handler.removeCallbacksAndMessages(null);
             placeholderImage.setImageBitmap(bitmap);
+            fetchResultBtn.setVisibility(View.VISIBLE);
         }
     }
 
@@ -155,8 +231,8 @@ public class WordSearchFragment extends Fragment {
                         for (Text.Element element : line.getElements()) {
                             String elementText = element.getText();
                             Point[] elementCornerPoints = element.getCornerPoints();
-                            Rect elementFrame = element.getBoundingBox();
-                            result.append(elementText);
+                            Rect xelementFrame = element.getBoundingBox();
+                            result.append(blockText);
                         }
                         resultsTextView.setText(result);
                         if (resultsTextView.getVisibility() == View.VISIBLE && result.length() >= 1) {

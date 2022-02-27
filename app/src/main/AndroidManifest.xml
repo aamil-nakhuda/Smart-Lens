@@ -15,7 +15,10 @@
         android:theme="@style/Theme.SmartLens">
         <activity
             android:name=".ImageSearchResultActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

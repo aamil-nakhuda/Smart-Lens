@@ -2,7 +2,6 @@
     <string name="app_name">Smart Lens</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="image_search">Image Search</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="word_search">Word Search</string>
     <string name="code_search">Code Search</string>
     <string name="live_word_search">Live Search</string>

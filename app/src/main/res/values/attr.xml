@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Light_Theme">
+        <attr name="action_bar" format="color"/>
+        <attr name="activity_bg" format="color"/>
+        <attr name="outline_btn_txt_icon" format="color"/>
+    </declare-styleable>
+</resources>

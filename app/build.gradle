@@ -56,4 +56,4 @@ dependencies {
 //    implementation 'com.google.firebase:firebase-ml-natural-language-translate-model:20.0.9'
 }
 //From StackOverflow due to errors
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'
