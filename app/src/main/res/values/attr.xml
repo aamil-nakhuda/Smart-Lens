@@ -4,5 +4,7 @@
         <attr name="action_bar" format="color"/>
         <attr name="activity_bg" format="color"/>
         <attr name="outline_btn_txt_icon" format="color"/>
+        <attr name="main_dark_color" format="color"/>
+        <attr name="main_light_color" format="color"/>
     </declare-styleable>
 </resources>

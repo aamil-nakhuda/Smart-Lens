@@ -18,5 +18,8 @@
         <item name="action_bar">@color/light_theme_dark_blue</item>
         <item name="activity_bg">@color/white</item>
         <item name="outline_btn_txt_icon">@color/light_theme_dark_blue</item>
+
+        <item name="main_dark_color">@color/light_theme_dark_blue</item>
+        <item name="main_light_color">@color/light_theme_blue</item>
     </style>
 </resources>

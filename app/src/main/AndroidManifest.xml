@@ -14,6 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartLens">
         <activity
+            android:name=".SplashScreenActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Splash"
+            tools:ignore="LockedOrientationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ImageSearchResultActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"
@@ -28,11 +40,6 @@
                 android:name="com.google.firebase.ml.vision.DEPENDENCIES"
                 android:value="ocr,model2,model3" />
             <!-- To use multiple models: android:value="ocr,model2,model3" -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

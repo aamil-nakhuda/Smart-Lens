@@ -44,8 +44,9 @@ public class ImageSearchFragment extends Fragment {
         actionBarTv = view.findViewById(R.id.activity_name);
         actionBarTv.setText("Image Search");
 
+
         int[] placeHolderImages = {R.drawable.img_search, R.drawable.add_img, R.drawable.img_search2
-                , R.drawable.img_search3,R.drawable.img_search4};
+                , R.drawable.img_search3, R.drawable.img_search4};
         Runnable runnable = new Runnable() {
             int i = 0;
 
@@ -67,6 +68,7 @@ public class ImageSearchFragment extends Fragment {
                 Intent resultsIntent = new Intent(getContext(), ImageSearchResultActivity.class);
                 //this is required in next activity don't forget
                 resultsIntent.putExtra("BitmapImage", bitmap);
+
                 startActivity(resultsIntent);
             }
         });

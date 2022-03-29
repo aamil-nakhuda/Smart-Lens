@@ -77,6 +77,8 @@ public class ImageSearchResultActivity extends AppCompatActivity {
         loadingIV.setVisibility(View.VISIBLE);
         loadingTV.setVisibility(View.VISIBLE);
 
+        searchRVModelArrayList.clear();
+        searchRVAdapter.notifyDataSetChanged();
         FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
 
         FirebaseVisionImageLabeler labeler = FirebaseVision.getInstance().getOnDeviceImageLabeler();

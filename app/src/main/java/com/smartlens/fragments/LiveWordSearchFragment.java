@@ -1,16 +1,21 @@
 package com.smartlens.fragments;
 
 import android.Manifest;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -26,7 +31,8 @@ public class LiveWordSearchFragment extends Fragment {
 
     private static final int ASK_PERMISSION = 100;
     private SurfaceView surfaceView;
-    private TextView textView;
+    private ImageView copyImgActionBar, shareImgActionBar;
+    private TextView textView, actionBarTitle;
     private CameraSource cameraSource;
 
     public LiveWordSearchFragment() {
@@ -41,6 +47,39 @@ public class LiveWordSearchFragment extends Fragment {
 
         surfaceView = view.findViewById(R.id.surface_view);
         textView = view.findViewById(R.id.text_view);
+        copyImgActionBar = view.findViewById(R.id.copy_button);
+        shareImgActionBar = view.findViewById(R.id.share_button);
+        actionBarTitle = view.findViewById(R.id.activity_name);
+        actionBarTitle.setText("Live Word Search");
+
+        copyImgActionBar.setVisibility(View.VISIBLE);
+        copyImgActionBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String dataCopyOrShareListen = textView.getText().toString();
+                ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("TextCopied", dataCopyOrShareListen);
+                clipboard.setPrimaryClip(clipData);
+
+                Toast.makeText(getContext(), "Copied to Clipboard", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        shareImgActionBar.setVisibility(View.VISIBLE);
+        shareImgActionBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String dataCopyOrShareListen = textView.getText().toString();
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, dataCopyOrShareListen);
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+
+            }
+        });
 
         startCamera();
 
@@ -51,7 +90,7 @@ public class LiveWordSearchFragment extends Fragment {
         final TextRecognizer textRecognizer = new TextRecognizer.Builder(getContext()).build();
 
         if (!textRecognizer.isOperational()) {
-            Log.i("LiveWordSearchFragment", "startCamera: Dependencies not loaded yet");
+//            Log.i("LiveWordSearchFragment", "startCamera: Dependencies not loaded yet");
         } else {
             cameraSource = new CameraSource.Builder(getContext(), textRecognizer)
                     .setFacing(CameraSource.CAMERA_FACING_BACK).setRequestedPreviewSize(1280, 1024)

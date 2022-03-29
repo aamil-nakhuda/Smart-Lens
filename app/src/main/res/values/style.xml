@@ -19,10 +19,10 @@
 
     <style name="MyOutlineBtn" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:padding">8dp</item>
-        <item name="android:textColor">@color/white</item>
         <item name="android:layout_centerInParent">true</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:visibility">gone</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="Theme.Splash" parent="Theme.SmartLens">
+        <item name="android:windowBackground">@drawable/splash_screen_bg</item>
     </style>
 </resources>

@@ -48,6 +48,7 @@
         app:iconSize="25dp"
         app:iconTint="?attr/outline_btn_txt_icon"
         app:strokeColor="?attr/action_bar"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        android:visibility="gone"/>
 
 </RelativeLayout>

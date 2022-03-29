@@ -1,16 +1,773 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_200"
     tools:context=".fragments.CodeSearchFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Code Fragment"
-        android:textSize="40dp" />
+        android:layout_height="wrap_content"
+        android:background="?attr/activity_bg"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <include
+            android:id="@+id/action_bar"
+            layout="@layout/action_bar" />
+
+
+        <ImageView
+            android:id="@+id/placeholder_image_code"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:visibility="visible"
+            tools:src="@drawable/code_search" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/black"
+            app:cardCornerRadius="32dp"
+            app:cardPreventCornerOverlap="false">
+
+            <SurfaceView
+                android:id="@+id/surface_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/start_scan_code"
+                style="@style/MyNormalBtn"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:text="Start Scan"
+                android:textSize="16sp"
+                app:cornerRadius="30dp"
+
+                app:icon="@drawable/ic_round_add_a_photo_24"
+                app:iconSize="25dp"
+                app:iconTint="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/copy_code"
+                style="@style/MyOutlineBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:enabled="false"
+                android:gravity="center"
+                android:text="Copy Code"
+                android:textColor="?attr/outline_btn_txt_icon"
+                android:textSize="16sp"
+                android:visibility="visible"
+                app:cornerRadius="30dp"
+                app:icon="@drawable/ic_round_content_copy_24"
+                app:iconSize="25dp"
+                app:iconTint="?attr/outline_btn_txt_icon"
+                app:strokeColor="?attr/action_bar" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/results_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:textColor="?attr/outline_btn_txt_icon"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:text="public class AddTwoNumbers \{\n
+\n
+   public static void main(String[] args) {
+     \n
+      \nint num1 = 5, num2 = 15, sum;
+     \n sum = num1 + num2;
+\n
+      \nSystem.out.println(Sum of these numbers:+sum);
+ \n  }
+\n}"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Languages"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/c_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                android:scaleType="centerInside"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/c" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="C Language"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cpp_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                android:scaleType="centerInside"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/cplusplus" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="C++"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cs_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                android:scaleType="centerInside"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/csharp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="C#"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/java_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                android:scaleType="centerInside"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/java" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="Java"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/py_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                android:scaleType="centerInside"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/python" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="Python"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/js_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                android:scaleType="centerInside"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/js" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="Javascript"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/ts_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                android:scaleType="centerInside"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/scala" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="Scala"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/ruby_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                android:scaleType="centerInside"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/ruby" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="Ruby"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/dart_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                android:scaleType="centerInside"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/dart" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="Dart"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/swift_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                android:scaleType="centerInside"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/swift" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="Swift"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Code Editor's and IDE's"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/vscode_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/vscode" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="Visual Studio Code"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/as_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/image9" />
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="Android Studio"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/intellij_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/intellij" />
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="IntelliJ Idea"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/pycharm_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/pycharm" />
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="PyCharm"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/eclipse_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/ic_eclipse" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="Eclipse"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/jupyter_CV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="?attr/action_bar"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardMaxElevation="5dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/white"
+                                app:shapeAppearanceOverlay="@style/ImageListItemSize"
+                                app:srcCompat="@drawable/jupyter" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="Jupyter"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
