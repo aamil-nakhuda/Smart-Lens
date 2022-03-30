@@ -141,20 +141,6 @@ public class WordSearchFragment extends Fragment {
         listenChip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                tts = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
-//                    @Override
-//                    public void onInit(int i) {
-//                        if (i == TextToSpeech.SUCCESS) {
-//                            Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
-//                            tts.setLanguage(Locale.US);
-//                        } else {
-//                            Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//
-//
-//                tts.speak("Hello I am Text to speech", TextToSpeech.QUEUE_FLUSH, null);
 
                 //apply text to speech on tts
                 tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {

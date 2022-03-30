@@ -1,8 +1,10 @@
 package com.smartlens.fragments;
 
+import static android.Manifest.permission.CAMERA;
 import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
@@ -77,14 +81,50 @@ public class ImageSearchFragment extends Fragment {
         clickBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent takeImageFromObjSearch = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takeImageFromObjSearch.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivityForResult(takeImageFromObjSearch, REQUEST_IMAGE_CAPTURE);
+                if (checkPermissions()) {
+                    clickImage();
+                } else {
+                    requestPermissions();
                 }
+
             }
         });
 
+
         return view;
+    }
+
+    private boolean checkPermissions() {
+        int cameraPermission = ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), CAMERA);
+        return cameraPermission == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermissions() {
+        int PERMISSION_CODE = 200;
+        requestPermissions(new String[]{
+                CAMERA
+        }, PERMISSION_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults.length > 0) {
+            boolean cameraPermission = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+            if (cameraPermission) {
+                Toast.makeText(getActivity(), "Permission Granted!", Toast.LENGTH_SHORT).show();
+                clickImage();
+            } else {
+                Toast.makeText(getActivity(), "Permission Denied!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void clickImage() {
+        Intent takeImageFromObjSearch = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takeImageFromObjSearch.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(takeImageFromObjSearch, REQUEST_IMAGE_CAPTURE);
+        }
     }
 
     @Override
