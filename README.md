@@ -136,7 +136,7 @@ It includes:
 13. Editors in different languages and famous Text Editors and IDE’s
 14. Some of the above functionality in Dynamic Dark Mode
 
-![Screenshots](images/Smart Lens Screenshots.pdf)
+![Screenshots](images/Smart-Lens-Screenshots.pdf)
 
 
 > Screenshots demonstrate real use cases captured from the emulator.
