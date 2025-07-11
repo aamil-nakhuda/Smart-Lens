@@ -111,7 +111,7 @@ Tested scenarios include:
 
 Comprehensive project documentation detailing background, objectives, analysis, design, testing methodology, and results is available in the full report:
 
-- 🔗 ![Smart Lens Project Documentation (PDF)](docs/Smart Lens Documentation.pdf)
+- 🔗 ![Smart Lens Project Documentation (PDF)](docs/Smart-Lens-Documentation.pdf)
 
 It includes:
 - System Requirements
