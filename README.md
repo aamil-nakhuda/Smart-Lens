@@ -1,4 +1,4 @@
-# 📘 Smart Lens
+# 🔍 Smart Lens
 
 &#x20;&#x20;
 
@@ -82,7 +82,7 @@ To run Smart Lens locally:
    https://github.com/aamil-nakhuda/Smart-Lens.git
    ```
 
-   Or click [Download ZIP](https://github.com/aamil-nakhuda/Smart-Lens/archive/refs/heads/main.zip)
+   Or click [Download ZIP](https://github.com/aamil-nakhuda/Smart-Lens/archive/refs/heads/master.zip)
 
 2. **Open in Android Studio**
 
@@ -111,7 +111,7 @@ Tested scenarios include:
 
 Comprehensive project documentation detailing background, objectives, analysis, design, testing methodology, and results is available in the full report:
 
-- 🔗 ![Smart Lens Project Documentation (PDF)](docs/smart-lens-documentation)
+- 🔗 ![Smart Lens Project Documentation (PDF)](docs/Smart Lens Documentation.pdf)
 
 It includes:
 - System Requirements
@@ -136,7 +136,7 @@ It includes:
 13. Editors in different languages and famous Text Editors and IDE’s
 14. Some of the above functionality in Dynamic Dark Mode
 
-![Screenshots](images/smart-lens-screenshots)
+![Screenshots](images/Smart Lens Screenshots.pdf)
 
 
 > Screenshots demonstrate real use cases captured from the emulator.
